@@ -28,7 +28,6 @@ def accueil():
 def presentation():
     return "Je m'appelle Léina et je suis étudiante en informatique."
 
-
 # ---------------------------------------------------------------
 #  Ne pas modifier : utile seulement pour lancer le site
 #  sur votre propre ordinateur (python flask_app.py)

@@ -8,7 +8,7 @@
 #  Les consignes sont dans le dossier "exercices/".
 # ---------------------------------------------------------------
 
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -26,17 +26,7 @@ def accueil():
 # ---------------------------------------------------------------
 @app.get("/presentation")
 def presentation():
-    return """
-    <h1>Léina OUMRIDA</h1>
-    <p>Je suis étudiante en <strong>première année d'informatique</strong>.</p>
-    <h2>Ce que j'aime manger </h2>
-    <ul>
-        <li>Les jeux vidéo de voiture </li>
-        <li>La musique</li>
-        <li>Le code (bientôt !mhh oe nan )</li>
-    </ul>
-    """
-
+    return render_template("presentation.html", prenom="Léina", nom="Oumrida")
 # ---------------------------------------------------------------
 #  Ne pas modifier : utile seulement pour lancer le site
 #  sur votre propre ordinateur (python flask_app.py)

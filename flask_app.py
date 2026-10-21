@@ -19,15 +19,14 @@ app = Flask(__name__)
 @app.get("/")
 def accueil():
     return "Bienvenue sur le site de Léina 🚀"
-    @app.get("/presentation")
-def presentation():
-    return "Je m'appelle Léina et je suis étudiante en informatique."
 
 
 # ---------------------------------------------------------------
 #  Ajoutez vos nouvelles routes ci-dessous 👇
 # ---------------------------------------------------------------
-
+@app.get("/presentation")
+def presentation():
+    return "Je m'appelle Léina et je suis étudiante en informatique."
 
 
 # ---------------------------------------------------------------

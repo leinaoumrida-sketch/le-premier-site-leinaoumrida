@@ -1,5 +1,5 @@
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, abort
 from html import escape
 
 app = Flask(__name__)
@@ -105,3 +105,26 @@ def salut():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
+
+
+# ---------------------------------------------------------------
+# EXERCICE 9 : LES CODES DE STATUT HTTP
+# ---------------------------------------------------------------
+
+# 3xx : redirection vers la page d'accueil
+@app.get("/home")
+def home():
+    return redirect("/")
+
+
+# 4xx : accès interdit
+@app.get("/secret")
+def secret():
+    abort(403)
+
+
+# Page d'erreur 404 personnalisée
+@app.errorhandler(404)
+def page_introuvable(erreur):
+    return render_template("404.html"), 404
+

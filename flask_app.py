@@ -1,35 +1,107 @@
-# ---------------------------------------------------------------
-#  Mon premier site Web avec Flask
-# ---------------------------------------------------------------
-#  Ce fichier est le "cerveau" de votre site : c'est lui qui
-#  reçoit les demandes des navigateurs et qui fabrique les réponses.
-#
-#  Vous allez le compléter petit à petit, exercice après exercice.
-#  Les consignes sont dans le dossier "exercices/".
-# ---------------------------------------------------------------
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+from html import escape
 
 app = Flask(__name__)
 
 
-# Une "route" associe une adresse (URL) à une fonction Python.
-# Ici : quand quelqu'un visite la page d'accueil "/",
-# Flask exécute la fonction accueil() et renvoie son résultat au navigateur.
+# ---------------------------------------------------------------
+# PAGE D'ACCUEIL
+# ---------------------------------------------------------------
+
 @app.get("/")
 def accueil():
-    return "Bienvenue sur le site de Léina 🚀"
+    return render_template("accueil.html")
 
 
 # ---------------------------------------------------------------
-#  Ajoutez vos nouvelles routes ci-dessous 👇
+# PAGE DE PRESENTATION
 # ---------------------------------------------------------------
+
 @app.get("/presentation")
 def presentation():
-    return render_template("presentation.html", prenom="Léina", nom="Oumrida")
+    return render_template(
+        "presentation.html",
+        prenom="Léina",
+        nom="Oumrida"
+    )
+
+
 # ---------------------------------------------------------------
-#  Ne pas modifier : utile seulement pour lancer le site
-#  sur votre propre ordinateur (python flask_app.py)
+# PAGE LOISIRS
 # ---------------------------------------------------------------
+
+@app.get("/loisirs")
+def loisirs():
+    return """
+    <!DOCTYPE html>
+    <html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>Mes loisirs</title>
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body>
+        <nav>
+            <a href="/">Accueil</a>
+            <a href="/presentation">Présentation</a>
+            <a href="/loisirs">Loisirs</a>
+            <a href="/formulaire">Formulaire</a>
+        </nav>
+
+        <h1>Mes loisirs</h1>
+        <ul>
+            <li>La danse</li>
+            <li>Le sport</li>
+            <li>La cuisine</li>
+        </ul>
+    </body>
+    </html>
+    """
+
+
+# ---------------------------------------------------------------
+# EXERCICE 7 : INFORMATION DANS L'URL
+# ---------------------------------------------------------------
+
+@app.get("/bonjour/<prenom>")
+def bonjour(prenom):
+    return f"<h1>Bonjour {escape(prenom)} !</h1>"
+
+
+@app.get("/calcul")
+def calcul():
+    a = int(request.args.get("a", 0))
+    b = int(request.args.get("b", 0))
+
+    return f"{a} + {b} = {a + b}"
+
+
+# ---------------------------------------------------------------
+# EXERCICE 8 : FORMULAIRES
+# ---------------------------------------------------------------
+
+@app.get("/formulaire")
+def formulaire():
+    return render_template("formulaire.html")
+
+
+@app.route("/salut", methods=["GET", "POST"])
+def salut():
+
+    if request.method == "POST":
+        prenom = request.form.get("prenom", "inconnu")
+        ville = request.form.get("ville", "nulle part")
+    else:
+        prenom = request.args.get("prenom", "inconnu")
+        ville = request.args.get("ville", "nulle part")
+
+    return f"Bonjour {escape(prenom)}, qui vient de {escape(ville)} ! (reçu en {request.method})"
+
+
+# ---------------------------------------------------------------
+# LANCEMENT DU SITE
+# ---------------------------------------------------------------
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)

@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Accueil - Mon site</title>
+    <title>Présentation</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 
@@ -17,22 +17,25 @@
         <a href="/formulaire">Formulaire</a>
     </nav>
 
-    <h1>Bienvenue sur le site de Léina ! 🚀</h1>
+    <h1>{{ prenom }} {{ nom }}</h1>
 
     <p>
-        Bienvenue sur mon premier site Web réalisé avec Python et Flask.
+        Je suis étudiante à l'ICAM.
     </p>
 
-    <p>
-        Ce site me permet de découvrir le fonctionnement du Web,
-        du HTML, du CSS et du langage Python.
-    </p>
+    <h2>Mon parcours</h2>
+
+    <ul>
+        <li>Trésorière du bureau d'intégration à l'ICAM.</li>
+        <li>Chef de projet pour le projet drone à l'ICAM.</li>
+        <li>Chef de projet pour un projet de jeu vidéo à EPITA.</li>
+    </ul>
+
+    <h2>Mes engagements</h2>
 
     <p>
-        Pour découvrir l'histoire du Web :
-        <a href="https://fr.wikipedia.org/wiki/World_Wide_Web">
-            Cliquez ici
-        </a>.
+        J'aime participer à des projets collectifs,
+        travailler en équipe et aider les autres.
     </p>
 
 </body>

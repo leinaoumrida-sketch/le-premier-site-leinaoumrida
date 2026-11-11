@@ -1,1 +1,38 @@
 
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Horloge</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <nav>
+        <a href="/">Accueil</a>
+        <a href="/presentation">Présentation</a>
+        <a href="/loisirs">Loisirs</a>
+        <a href="/formulaire">Formulaire</a>
+    </nav>
+
+    <h1>Il est <span id="heure">...</span></h1>
+
+    <p id="message"></p>
+
+    <script>
+        // Ce code s'exécute dans le navigateur
+        async function mettreAJour() {
+            const reponse = await fetch("/api/heure");
+            const donnees = await reponse.json();
+
+            document.getElementById("heure").textContent = donnees.heure;
+            document.getElementById("message").textContent = donnees.message;
+        }
+
+        mettreAJour();
+        setInterval(mettreAJour, 1000);
+    </script>
+
+</body>
+</html>
+

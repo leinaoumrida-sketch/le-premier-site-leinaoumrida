@@ -1,5 +1,7 @@
 
-from flask import Flask, render_template, request, redirect, abort
+from flask import Flask, render_template, request, redirect, abort, jsonify
+from datetime import datetime
+from zoneinfo import ZoneInfo
 from html import escape
 
 app = Flask(__name__)
@@ -140,3 +142,14 @@ def moi():
         langues=request.headers.get("Accept-Language"),
         entetes=request.headers,
     )
+
+
+@app.get("/api/heure")
+def api_heure():
+    maintenant = datetime.now(ZoneInfo("Europe/Paris"))
+
+    return jsonify({
+        "heure": maintenant.strftime("%H:%M:%S"),
+        "date": maintenant.strftime("%d/%m/%Y"),
+        "message": "Bonjour depuis mon API !",
+    })

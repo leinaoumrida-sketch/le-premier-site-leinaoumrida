@@ -1,5 +1,21 @@
-<h1>Ce que je sais de vous 🔍</h1>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Ce que je sais de vous</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Ce que je sais de vous 🔍</h1>
+    <p><strong>Votre adresse IP :</strong> {{ ip }}</p>
+    <p><strong>Votre navigateur :</strong> {{ navigateur }}</p>
+    <p><strong>Vos langues :</strong> {{ langues }}</p>
 
-<p>Votre adresse IP : {{ ip }}</p>
-<p>Votre navigateur : {{ navigateur }}</p>
-<p>Vos langues : {{ langues }}</p>
+    <h2>Tous les en-têtes reçus</h2>
+    <ul>
+    {% for nom, valeur in entetes %}
+        <li><strong>{{ nom }}</strong> : {{ valeur }}</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>

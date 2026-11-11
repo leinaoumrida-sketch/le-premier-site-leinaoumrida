@@ -105,8 +105,7 @@ def salut():
 # LANCEMENT DU SITE
 # ---------------------------------------------------------------
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+
 
 
 # ---------------------------------------------------------------
@@ -153,3 +152,9 @@ def api_heure():
         "date": maintenant.strftime("%d/%m/%Y"),
         "message": "Bonjour depuis mon API !",
     })
+@app.get("/horloge")
+def horloge():
+    return render_template("horloge.html")
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)
